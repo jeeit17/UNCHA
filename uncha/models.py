@@ -808,7 +808,7 @@ class UNCHA(MERU):
 
             # Intra-modal entailment + Uncertainty calibration
 
-            cross_image_entailment_loss, cross_img_calibration_loss = self. uncertainty_calibrated_entailment_loss(
+            cross_image_entailment_loss, cross_img_calibration_loss = self.uncertainty_calibrated_entailment_loss(
                     cross_image_entail_residual,
                     log_u_img
                 )
