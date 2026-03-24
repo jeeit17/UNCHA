@@ -549,7 +549,6 @@ class UNCHA(MERU):
         self,
         entail_residual,    
         log_uncertainty, 
-        beta=-1.0,
         alpha=10.0,
         stop_grad=True
     ):
@@ -569,7 +568,7 @@ class UNCHA(MERU):
         prob = torch.softmax(log_uncertainty.flatten(), dim=0)
         entropy = -(prob * torch.log(prob + 1e-8)).sum()
 
-        calibration_loss = alpha * (calibration_term - beta * entropy)
+        calibration_loss = alpha * (calibration_term + entropy)
 
         return mean_loss.mean(), calibration_loss.mean()
 

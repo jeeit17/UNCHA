@@ -119,9 +119,8 @@ python scripts/evaluate.py --config configs/eval_hierarchical_metrics.py \
 
 | Model | Backbone | ImageNet Acc. | COCO R@1 (Text) | COCO R@1 (Image) |
 |-------|----------|:------------:|:----------------:|:-----------------:|
-| UNCHA | [ViT-S/16](https://huggingface.co/username/uncha-vit-s16) | 43.9 | 69.9 | 56.2 |
-| UNCHA | [ViT-B/16](https://huggingface.co/username/uncha-vit-b16) | 48.8 | 72.7 | 60.0 |
-
+| UNCHA | [ViT-S/16](https://huggingface.co/hayeonkim/uncha/resolve/main/uncha_vit_s.pth?download=true) | 43.9 | 69.9 | 56.2 |
+| UNCHA | [ViT-B/16](https://huggingface.co/hayeonkim/uncha/resolve/main/uncha_vit_b.pth?download=true) | 48.8 | 72.7 | 60.0 |
 
 ## Method overview
 
