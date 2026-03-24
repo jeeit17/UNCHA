@@ -522,10 +522,11 @@ class HyCoCLIP(MERU):
 
 class UNCHA(MERU):
     """
-    Our UNCHA model, that modifies MERU and CLIP to embed images, texts and their localized box 
-    information hierarchically in a hyperbolic space.
+    UNCHA extends HyCoCLIP, MERU and CLIP to jointly embed images, texts, and their localized regions 
+    in a unified hyperbolic space, enabling hierarchical part–whole alignment. 
+    It further incorporates uncertainty modeling and entailment-based objectives 
+    to capture the semantic representativeness of parts with respect to the whole.
     """
-
     def __init__(
         self,
         visual: nn.Module,
