@@ -5,34 +5,35 @@
 PyTorch implementation of uncertainty-guided part-to-whole alignment in hyperbolic vision-language models.
 
 [UNCHA: Uncertainty-guided Compositional Alignment with Part-to-Whole Semantic Representativeness in Hyperbolic Vision-Language Models](https://jeeit17.github.io/UNCHA-project_page/)  
-[Hayeon Kim]()\*<sup>1</sup>,
-[Ji Ha Jang]()\*<sup>1</sup>,
-[Junghun James Kim]()<sup>2</sup>,
-[Se Young Chun]()<sup>1,2</sup>  
+[Hayeon Kim](https://janeyeon.github.io)\*<sup>1</sup>,
+[Ji Ha Jang](https://jeeit17.github.io)\*<sup>1</sup>,
+[Junghun James Kim](https://www.linkedin.com/in/james-hun-kim-a4682b106/)<sup>2</sup>,
+[Se Young Chun](https://icl.snu.ac.kr/pi)<sup>1,2</sup>  
 <sup>1</sup>Dept. of Electrical and Computer Engineering, <sup>2</sup>INMC & IPAI  
 Seoul National University, Republic of Korea  
 \*denotes equal contribution
 
+
+## What is UNCHA?
+
 <p align="center">
-  <img src="imgs/fig2.png" width="800"/>
+  <img src="assets/imgs/motivation_fig.png" width="600"/>
 </p>
 
+Hyperbolic Vision-Language Models (VLMs) embed images and text in hyperbolic space to capture hierarchical part-whole relationships (e.g., a "street" scene contains parts like "cars", "people", "traffic signs"). However, **not all parts represent the whole scene equally** — a part showing the main street is far more representative than a tiny traffic sign in the corner.
 
-## TL;DR quickstart
+UNCHA models this *part-to-whole semantic representativeness* as **hyperbolic uncertainty**:
 
-To set up the environment, download the training data, and begin training:
+- **Low uncertainty** → the part is highly representative of the whole scene (closer to the whole in meaning)
+- **High uncertainty** → the part is less representative (e.g., a blurry crop or a minor background object)
 
-```bash
-conda create -n uncha python=3.9
-conda activate uncha
-python -m pip install --pre timm
-python -m pip install -r requirements.txt
-python setup.py develop
+This uncertainty is incorporated into:
 
-# Download & preprocess GRIT dataset (see Data section below)
-# Train UNCHA with ViT-B/16
-./scripts/train.sh --config configs/train_uncha_vit_b.py --num-gpus 4 --output-dir ./train_results/test --checkpoint-period 10000
-```
+1. **Contrastive loss** — adaptive temperature scaling so representative parts contribute more to alignment (Eq. 10-11)
+2. **Entailment loss** — uncertainty calibration with entropy regularization for well-structured hyperbolic embeddings (Eq. 14-17)
+
+The result: more accurate part-whole ordering in hyperbolic space, better compositional understanding, and state-of-the-art performance on zero-shot classification, retrieval, and multi-label benchmarks.
+
 
 
 ## Setup
@@ -54,26 +55,6 @@ python -m pip install -r requirements.txt
 python setup.py develop
 ```
 
-
-## What is UNCHA?
-
-Hyperbolic Vision-Language Models (VLMs) embed images and text in hyperbolic space to capture hierarchical part-whole relationships (e.g., a "street" scene contains parts like "cars", "people", "traffic signs"). However, **not all parts represent the whole scene equally** — a part showing the main street is far more representative than a tiny traffic sign in the corner.
-
-UNCHA models this *part-to-whole semantic representativeness* as **hyperbolic uncertainty**:
-
-- **Low uncertainty** → the part is highly representative of the whole scene (closer to the whole in meaning)
-- **High uncertainty** → the part is less representative (e.g., a blurry crop or a minor background object)
-
-This uncertainty is incorporated into:
-
-1. **Contrastive loss** — adaptive temperature scaling so representative parts contribute more to alignment (Eq. 10-11)
-2. **Entailment loss** — uncertainty calibration with entropy regularization for well-structured hyperbolic embeddings (Eq. 14-17)
-
-The result: more accurate part-whole ordering in hyperbolic space, better compositional understanding, and state-of-the-art performance on zero-shot classification, retrieval, and multi-label benchmarks.
-
-<p align="center">
-  <img src="assets/imgs/motivation_fig.png" width="600"/>
-</p>
 
 
 ## Running code
@@ -148,7 +129,7 @@ python scripts/evaluate.py --config configs/eval_hierarchical_metrics.py \
   <img src="assets/imgs/UNCHA_main_fig_final.png" width="800"/>
 </p>
 
-UNCHA models part-to-whole semantic representativeness as hyperbolic uncertainty and incorporates it into both contrastive and entailment objectives. The overall loss is:  **L = L_con^un + λ_ent · L_ent^un**. See our [paper](https://arxiv.org/abs/2603.22042) for full derivations.
+UNCHA introduces uncertainty to explicitly quantify how well each part represents the whole scene. By assigning lower uncertainty to more representative parts and higher uncertainty to less informative ones, it enables adaptive weighting in the contrastive objective, leading to improved part–whole alignment. Furthermore, uncertainty is calibrated through the entailment loss and regularized by entropy, ensuring stable and balanced use of the hyperbolic embedding space. Together, these components allow UNCHA to achieve more effective compositional understanding and alignment. See our [paper](https://arxiv.org/abs/2603.22042) for full derivations.
 
 
 ## Results
@@ -176,14 +157,16 @@ UNCHA models part-to-whole semantic representativeness as hyperbolic uncertainty
 If you find this work useful, please cite:
 
 ```bibtex
-@article{kim2025uncha,
-  title={Uncertainty-guided Compositional Alignment with Part-to-Whole Semantic Representativeness in Hyperbolic Vision-Language Models},
-  author={Hayeon Kim and Ji Ha Jang and Junghun James Kim and Se Young Chun},
-  year={2025},
+@inproceedings{kim2026uncha,
+  author    = {Kim, Hayeon and Jang, Ji Ha and Kim, Junghun James and Chun, Se Young},
+  title     = {UNCHA: Uncertainty-guided Compositional Hyperbolic Alignment with Part-to-Whole Semantic Representativeness},
+  booktitle = {CVPR},
+  year      = {2026},
 }
+
 ```
 
 
 ## Acknowledgements
 
-This work was supported by IITP grants funded by the Korea government (MSIT), NRF grants, and BK21 FOUR program at Seoul National University. We also thank the authors of [MERU](https://github.com/facebookresearch/meru), [HyCoCLIP](https://github.com/avik-pal/HyCoCLIP), and [ATMG](https://github.com/SameraRamasinghe/ATMG) for their open-source implementations.# UNCHA
+This work was supported by IITP grants funded by the Korea government (MSIT), NRF grants funded by the Korea government (MSIT), the AI Computing Infrastructure Enhancement (GPU Rental Support) Program funded by MSIT, the BK21 FOUR Program at Seoul National University, and the AI-Bio Research Grant through Seoul National University. We also thank the authors of [MERU](https://github.com/facebookresearch/meru), [HyCoCLIP](https://github.com/avik-pal/HyCoCLIP), and [ATMG](https://github.com/SameraRamasinghe/ATMG) for their open-source implementations.# UNCHA
