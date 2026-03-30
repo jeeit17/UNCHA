@@ -24,7 +24,6 @@ train_results/
 *.safetensors
 
 datasets/
-data/
 *.npy
 *.npz
 
