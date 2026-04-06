@@ -1,5 +1,5 @@
-
 __pycache__/
+*.pyc
 *.py[cod]
 *.so
 *.egg-info/
@@ -30,8 +30,6 @@ datasets/
 .cache/
 hf_home/
 huggingface/
-__pycache__/
-*.pyc
 
 .vscode/
 .idea/
