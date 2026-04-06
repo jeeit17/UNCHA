@@ -1,6 +1,6 @@
 # UNCHA: UNcertainty-guided Compositional Hyperbolic Alignment (CVPR 2026)
 
-### [Project Page](https://jeeit17.github.io/UNCHA-project_page/) | [Paper](https://arxiv.org/abs/2603.22042) | [Code](https://github.com/jeeit17/UNCHA) | [Model](https://huggingface.co/hayeonkim/uncha)
+### [Project Page](https://jeeit17.github.io/UNCHA-project_page/) | [Paper](https://arxiv.org/abs/2603.22042) | [Code](https://github.com/jeeit17/UNCHA) | [Models](https://huggingface.co/hayeonkim/uncha)
 
 PyTorch implementation of uncertainty-guided part-to-whole alignment in hyperbolic vision-language models.
 
