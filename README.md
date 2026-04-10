@@ -1,4 +1,4 @@
-# UNCHA: UNcertainty-guided Compositional Hyperbolic Alignment (CVPR 2026)
+# UNCHA: UNcertainty-guided Compositional Hyperbolic Alignment (CVPR 2026 Highlight)
 
 ### [Project Page](https://jeeit17.github.io/UNCHA-project_page/) | [Paper](https://arxiv.org/abs/2603.22042) | [Code](https://github.com/jeeit17/UNCHA) | [Models](https://huggingface.co/hayeonkim/uncha)
 
