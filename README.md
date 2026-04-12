@@ -85,7 +85,7 @@ To train with ViT-B/16 backbone:
 ./scripts/train.sh --config configs/train_uncha_vit_b.py --num-gpus 4 --output-dir ./train_results/test --checkpoint-period 10000
 ```
 
-Training uses 4 GPUs with a total batch size of 768 and runs for 500K iterations.
+Training uses 4 NVIDIA A100 GPUs with a total batch size of 768 and runs for 500K iterations.
 
 ### Evaluation
 
